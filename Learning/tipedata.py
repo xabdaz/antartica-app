@@ -20,7 +20,7 @@ print("data : ", data_string)
 print("bertipe : ", type(data_bool))
 
 #tipe data complex
-data_complex: (int, int) = (4, 1)
+data_complex = (4, 1)
 print("data : ", data_complex)
 print("bertipe : ", type(data_complex))
 

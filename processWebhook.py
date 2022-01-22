@@ -1,6 +1,16 @@
+from logging import error
+from typing import final
 import flask
+from db_config import mysql
 import os
+
+from app import app
 from flask import send_from_directory
+from flask.wrappers import Response
+from mysql.connector import connection
+from werkzeug.datastructures import Headers
+from werkzeug.utils import redirect
+from werkzeug.wrappers import request
 
 app = flask.Flask(__name__)
 
@@ -218,7 +228,31 @@ def home():
   ]
 }
     '''
-    return json_data
+    return Response(response = json_data, content_type= "application/json")
+
+@app.route("/add", methods=['POST'])
+def add_data():
+  try:
+    username = request.form['username']
+    if username == 'POST':
+      data = (username, 'tester3', '0f5969d56d3cc003a10ae071613e2119a7fc3abd')
+
+    sql = "INSERT INTO user VALUES(%s, %s, %s)"
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute(sql, data)
+    conn.commit()
+      
+    flash('User added successfully!')
+    
+    return "halo world"
+  except Exception as error:
+		  print(error)
+  finally:
+    cursor.close()
+    conn.close()
+  #   print("")
+  #   pass
 
 if __name__ == "__main__":
     app.secret_key = 'ItIsASecret'
