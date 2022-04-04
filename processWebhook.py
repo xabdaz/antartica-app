@@ -219,7 +219,9 @@ def home():
 }
     '''
     return json_data
-
+@app.route('/reports/<path:path>')
+def send_report(path):
+    return send_from_directory('reports', path)
 if __name__ == "__main__":
     app.secret_key = 'ItIsASecret'
     app.debug = True
