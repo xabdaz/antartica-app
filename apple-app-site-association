@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "B53HAL46HW.id.co.okhome.okhomeapp.staging",
+                "paths": ["*"]
+            }
+        ]
+    }
+}
